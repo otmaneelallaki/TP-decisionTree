@@ -1,0 +1,12 @@
+---
+title: "TP 2 : Arbres"
+author: "EL ALLAKI Otmane"
+date: "28 Septembre 2023"
+toc: true
+format:
+  pdf:
+    documentclass: scrartcl
+    papersize: letter
+execute:
+  warning: false
+---
