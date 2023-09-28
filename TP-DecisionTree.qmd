@@ -13,7 +13,7 @@ execute:
 ---
 \newpage
 
-## Question 1.
+# Question 1.
 
 ### Mesure d'homogénéité en régression
 
@@ -48,7 +48,7 @@ $$
 
 $R^2$ varie de 0 à 1, où une valeur plus proche de 1 indique un meilleur ajustement du modèle aux données.
 
-## Classification avec les arbres
+### Classification avec les arbres
 
 Avec scikit-learn on peut construire des arbres de décision grâce au package tree. On obtient un classifieur avec **tree.DecisionTreeClassifier**.
 
@@ -77,7 +77,7 @@ from tp_arbres_source import (rand_gauss, rand_bi_gauss, rand_tri_gauss,
 ```
 
 
-### Qestion 2 
+# Qestion 2 
 
 a) Nous allons générer des échantillons de taille n = 456 en utilisant la fonction `rand_checkers()`, en veillant à maintenir un équilibre entre les classes, comme le montre la figure @fig1 :
 
