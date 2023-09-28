@@ -3060,11 +3060,9 @@ vertical-align: -.125em;
   <li><a href="#question-1." id="toc-question-1." class="nav-link active" data-scroll-target="#question-1.">Question 1.</a>
   <ul class="collapse">
   <li><a href="#mesure-dhomogénéité-en-régression" id="toc-mesure-dhomogénéité-en-régression" class="nav-link" data-scroll-target="#mesure-dhomogénéité-en-régression">Mesure d’homogénéité en régression</a></li>
+  <li><a href="#classification-avec-les-arbres" id="toc-classification-avec-les-arbres" class="nav-link" data-scroll-target="#classification-avec-les-arbres">Classification avec les arbres</a></li>
   </ul></li>
-  <li><a href="#classification-avec-les-arbres" id="toc-classification-avec-les-arbres" class="nav-link" data-scroll-target="#classification-avec-les-arbres">Classification avec les arbres</a>
-  <ul class="collapse">
   <li><a href="#qestion-2" id="toc-qestion-2" class="nav-link" data-scroll-target="#qestion-2">Qestion 2</a></li>
-  </ul></li>
   <li><a href="#question-3" id="toc-question-3" class="nav-link" data-scroll-target="#question-3">Question 3</a></li>
   <li><a href="#question-4" id="toc-question-4" class="nav-link" data-scroll-target="#question-4">Question 4</a></li>
   <li><a href="#question-5" id="toc-question-5" class="nav-link" data-scroll-target="#question-5">Question 5</a></li>
@@ -3104,8 +3102,8 @@ vertical-align: -.125em;
 
 </header>
 
-<section id="question-1." class="level2">
-<h2 class="anchored" data-anchor-id="question-1.">Question 1.</h2>
+<section id="question-1." class="level1">
+<h1>Question 1.</h1>
 <section id="mesure-dhomogénéité-en-régression" class="level3">
 <h3 class="anchored" data-anchor-id="mesure-dhomogénéité-en-régression">Mesure d’homogénéité en régression</h3>
 <p>En régression, lorsque l’objectif est de prédire une valeur numérique pour la variable dépendante Y plutôt que de classifier en classes, une mesure d’homogénéité couramment utilisée est la somme des carrés des résidus (Sum of Squares of Residuals ou SSR). La SSR est également connue sous le nom de somme des carrés expliqués.</p>
@@ -3128,9 +3126,8 @@ R^2 = \frac{SSR}{SST}
 </span></p>
 <p><span class="math inline">R^2</span> varie de 0 à 1, où une valeur plus proche de 1 indique un meilleur ajustement du modèle aux données.</p>
 </section>
-</section>
-<section id="classification-avec-les-arbres" class="level2">
-<h2 class="anchored" data-anchor-id="classification-avec-les-arbres">Classification avec les arbres</h2>
+<section id="classification-avec-les-arbres" class="level3">
+<h3 class="anchored" data-anchor-id="classification-avec-les-arbres">Classification avec les arbres</h3>
 <p>Avec scikit-learn on peut construire des arbres de décision grâce au package tree. On obtient un classifieur avec <strong>tree.DecisionTreeClassifier</strong>.</p>
 <div class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn <span class="im">import</span> tree</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -3153,8 +3150,10 @@ R^2 = \frac{SSR}{SST}
 <span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>                              plot_2d, frontiere)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<section id="qestion-2" class="level3">
-<h3 class="anchored" data-anchor-id="qestion-2">Qestion 2</h3>
+</section>
+</section>
+<section id="qestion-2" class="level1">
+<h1>Qestion 2</h1>
 <ol type="a">
 <li>Nous allons générer des échantillons de taille n = 456 en utilisant la fonction <code>rand_checkers()</code>, en veillant à maintenir un équilibre entre les classes, comme le montre la figure <span class="citation" data-cites="fig1">@fig1</span> :</li>
 </ol>
@@ -3240,7 +3239,6 @@ R^2 = \frac{SSR}{SST}
 </div>
 </div>
 </div>
-</section>
 </section>
 <section id="question-3" class="level1">
 <h1>Question 3</h1>
@@ -3691,7 +3689,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>\newpage</span>
 <span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a><span class="fu">## Question 1.</span></span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a><span class="fu"># Question 1.</span></span>
 <span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a><span class="fu">### Mesure d&#39;homogénéité en régression</span></span>
 <span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a></span>
@@ -3726,7 +3724,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb22-48"><a href="#cb22-48" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb22-49"><a href="#cb22-49" aria-hidden="true" tabindex="-1"></a>$R^2$ varie de 0 à 1, où une valeur plus proche de 1 indique un meilleur ajustement du modèle aux données.</span>
 <span id="cb22-50"><a href="#cb22-50" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-51"><a href="#cb22-51" aria-hidden="true" tabindex="-1"></a><span class="fu">## Classification avec les arbres</span></span>
+<span id="cb22-51"><a href="#cb22-51" aria-hidden="true" tabindex="-1"></a><span class="fu">### Classification avec les arbres</span></span>
 <span id="cb22-52"><a href="#cb22-52" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb22-53"><a href="#cb22-53" aria-hidden="true" tabindex="-1"></a>Avec scikit-learn on peut construire des arbres de décision grâce au package tree. On obtient un classifieur avec **tree.DecisionTreeClassifier**.</span>
 <span id="cb22-54"><a href="#cb22-54" aria-hidden="true" tabindex="-1"></a></span>
@@ -3755,7 +3753,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb22-81"><a href="#cb22-81" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb22-82"><a href="#cb22-82" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb22-83"><a href="#cb22-83" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-84"><a href="#cb22-84" aria-hidden="true" tabindex="-1"></a><span class="fu">### Qestion 2 </span></span>
+<span id="cb22-84"><a href="#cb22-84" aria-hidden="true" tabindex="-1"></a><span class="fu"># Qestion 2 </span></span>
 <span id="cb22-85"><a href="#cb22-85" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb22-86"><a href="#cb22-86" aria-hidden="true" tabindex="-1"></a>a) Nous allons générer des échantillons de taille n = 456 en utilisant la fonction <span class="in">`rand_checkers()`</span>, en veillant à maintenir un équilibre entre les classes, comme le montre la figure @fig1 :</span>
 <span id="cb22-87"><a href="#cb22-87" aria-hidden="true" tabindex="-1"></a></span>
@@ -3944,18 +3942,19 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb22-294"><a href="#cb22-294" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb22-295"><a href="#cb22-295" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb22-296"><a href="#cb22-296" aria-hidden="true" tabindex="-1"></a><span class="fu"># Question 7</span></span>
-<span id="cb22-297"><a href="#cb22-297" aria-hidden="true" tabindex="-1"></a>estimer la meilleur profondeur avec un cross_val_score</span>
-<span id="cb22-300"><a href="#cb22-300" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb22-301"><a href="#cb22-301" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> cross_val_score</span>
-<span id="cb22-302"><a href="#cb22-302" aria-hidden="true" tabindex="-1"></a>dmax <span class="op">=</span> <span class="dv">20</span></span>
-<span id="cb22-303"><a href="#cb22-303" aria-hidden="true" tabindex="-1"></a>scores <span class="op">=</span> np.ones(dmax)</span>
-<span id="cb22-304"><a href="#cb22-304" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-305"><a href="#cb22-305" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span> (dmax):</span>
-<span id="cb22-306"><a href="#cb22-306" aria-hidden="true" tabindex="-1"></a>    clf <span class="op">=</span> tree.DecisionTreeClassifier(criterion <span class="op">=</span> <span class="st">&quot;entropy&quot;</span>, max_depth<span class="op">=</span>i<span class="op">+</span><span class="dv">1</span>)</span>
-<span id="cb22-307"><a href="#cb22-307" aria-hidden="true" tabindex="-1"></a>    scores[i] <span class="op">=</span> np.mean(cross_val_score(clf, digits.data, digits.target, cv<span class="op">=</span><span class="dv">5</span>))</span>
-<span id="cb22-308"><a href="#cb22-308" aria-hidden="true" tabindex="-1"></a>tmax <span class="op">=</span> np.argmax(scores)</span>
-<span id="cb22-309"><a href="#cb22-309" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;la meilleur profondeur avec un cross_val_score est : &quot;</span>, tmax)</span>
-<span id="cb22-310"><a href="#cb22-310" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-297"><a href="#cb22-297" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-298"><a href="#cb22-298" aria-hidden="true" tabindex="-1"></a>estimer la meilleur profondeur avec un cross_val_score</span>
+<span id="cb22-301"><a href="#cb22-301" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb22-302"><a href="#cb22-302" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> cross_val_score</span>
+<span id="cb22-303"><a href="#cb22-303" aria-hidden="true" tabindex="-1"></a>dmax <span class="op">=</span> <span class="dv">20</span></span>
+<span id="cb22-304"><a href="#cb22-304" aria-hidden="true" tabindex="-1"></a>scores <span class="op">=</span> np.ones(dmax)</span>
+<span id="cb22-305"><a href="#cb22-305" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-306"><a href="#cb22-306" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span> (dmax):</span>
+<span id="cb22-307"><a href="#cb22-307" aria-hidden="true" tabindex="-1"></a>    clf <span class="op">=</span> tree.DecisionTreeClassifier(criterion <span class="op">=</span> <span class="st">&quot;entropy&quot;</span>, max_depth<span class="op">=</span>i<span class="op">+</span><span class="dv">1</span>)</span>
+<span id="cb22-308"><a href="#cb22-308" aria-hidden="true" tabindex="-1"></a>    scores[i] <span class="op">=</span> np.mean(cross_val_score(clf, digits.data, digits.target, cv<span class="op">=</span><span class="dv">5</span>))</span>
+<span id="cb22-309"><a href="#cb22-309" aria-hidden="true" tabindex="-1"></a>tmax <span class="op">=</span> np.argmax(scores)</span>
+<span id="cb22-310"><a href="#cb22-310" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;la meilleur profondeur avec un cross_val_score est : &quot;</span>, tmax)</span>
+<span id="cb22-311"><a href="#cb22-311" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
