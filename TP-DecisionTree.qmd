@@ -4,9 +4,278 @@ author: "EL ALLAKI Otmane"
 date: "28 Septembre 2023"
 toc: true
 format:
-  pdf:
-    documentclass: scrartcl
-    papersize: letter
+  html:
+    html-math-method: katex
+    code-tools: true
+    self-contained: true
 execute:
   warning: false
 ---
+\newpage
+
+## Question 1.
+
+### Mesure d'homogénéité en régression
+
+
+En régression, lorsque l'objectif est de prédire une valeur numérique pour la variable dépendante Y plutôt que de classifier en classes, une mesure d'homogénéité couramment utilisée est la somme des carrés des résidus (Sum of Squares of Residuals ou SSR). La SSR est également connue sous le nom de somme des carrés expliqués.
+
+La SSR mesure la quantité totale de variabilité dans les données qui est expliquée par le modèle de régression. Elle est calculée comme la somme des carrés des différences entre les valeurs observées de Y et les valeurs prédites par le modèle de régression. Plus précisément, la formule de la SSR est la suivante :
+
+ $$
+ SSR = \sum_{i=1}^{n} (y_i - \hat{y}_i)^2
+ $$
+
+ Où :
+
+* $y_i$ représente les valeurs observées de Y.
+
+* $ŷ_i$ représente les valeurs prédites de Y par le modèle de régression.
+
+Pour compléter l'analyse de la régression, on peut également calculer la somme des carrés totaux (Total Sum of Squares ou SST), qui mesure la variabilité totale des valeurs observées de Y sans prendre en compte le modèle de régression. La SST est calculée comme suit :
+
+$$
+ SST = \sum_{i=1}^{n} (y_i - \bar{y}_i)^2
+ $$
+Où $\bar{y}_i$ représente la moyenne des valeurs observées de Y.
+
+La SSR est ensuite utilisée pour calculer le coefficient de détermination R², qui est une mesure de la proportion de la variabilité totale expliquée par le modèle de régression :
+
+$$
+R^2 = \frac{SSR}{SST}
+$$
+
+
+$R^2$ varie de 0 à 1, où une valeur plus proche de 1 indique un meilleur ajustement du modèle aux données.
+
+## Classification avec les arbres
+
+Avec scikit-learn on peut construire des arbres de décision grâce au package tree. On obtient un classifieur avec **tree.DecisionTreeClassifier**.
+
+```{python}
+from sklearn import tree
+```
+
+
+```{python}
+#| code-fold: true
+#importer les librairies nécessaires
+import os
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+from matplotlib import rc
+import random
+from sklearn import tree, datasets
+from sklearn.metrics import accuracy_score
+from sklearn.tree import DecisionTreeClassifier
+from tp_arbres_source import (rand_gauss, rand_bi_gauss, rand_tri_gauss,
+                              rand_checkers, rand_clown,
+                              plot_2d, frontiere)
+
+
+```
+
+
+### Qestion 2 
+
+a) Nous allons générer des échantillons de taille n = 456 en utilisant la fonction `rand_checkers()`, en veillant à maintenir un équilibre entre les classes, comme le montre la figure @fig1 :
+
+```{python}
+#| label: fig1
+#| fig-cap: "Simulation d'échantillons avec randcheckers"
+#| code-fold: true
+
+np.random.seed(1)
+n1 = 114 
+n2 = 114
+n3 = 114
+n4 = 114
+sigma = 0.1
+data4 = rand_checkers(n1, n2, n3, n4, sigma)
+
+plot_2d(data4[:, :2], data4[:, 2], w=None)
+plt.show()
+```
+
+
+b) Traçons deux courbes qui donnent le pourcentage d’erreurs commises en fonction de la profondeur maximale de l’arbre.
+
+Créion deux objets 'arbre de décision' en spécifiant le critère de classification comme l'indice de gini ou l'entropie, avec la fonction 'DecisionTreeClassifier' du module 'tree'.
+
+```{python}
+#| code-fold: true
+dt_entropy = tree.DecisionTreeClassifier(criterion = "entropy" )
+dt_gini = tree.DecisionTreeClassifier()
+```
+Séparons les données en variable X (variable explicative) et variable Y (variable à expliquer
+
+```{python}
+n_samples = len(data4)
+X = data4[:, 0:2]
+Y = data4[:, 2]
+```
+
+
+Affichons les scores en fonction du paramètre max_depth
+
+```{python}
+dmax = 12
+scores_entropy = np.zeros(dmax)
+scores_gini = np.zeros(dmax)
+
+plt.figure(figsize=(15, 10))
+for i in range(dmax):
+    # max_depth=None
+    dt_entropy = tree.DecisionTreeClassifier(criterion = "entropy", max_depth=(i+1) )
+    # ...
+    dt_entropy.fit(X, Y)
+    scores_entropy[i] = dt_entropy.score(X, Y)
+
+    dt_gini =  tree.DecisionTreeClassifier(max_depth=(i+1) )
+    dt_gini.fit(X, Y)
+    scores_gini[i] = dt_gini.score(X,Y)
+
+    plt.subplot(3, 4, i + 1)
+    frontiere(lambda x: dt_gini.predict(x.reshape((1, -1))), X, Y, step=50, samples=False)
+plt.draw()
+
+```
+
+```{python}
+#| label: fig2
+#| fig-cap: "le pourcentage d'accurancy commises en fonction de la profondeur maximale de l’arbre"
+
+plt.figure()
+plt.plot(scores_gini, label = "Gini Accurancy ") 
+plt.plot(scores_entropy,  label = "Entropy Accurancy ")
+plt.xlabel('Max depth')
+plt.ylabel('Accuracy Score')
+plt.legend()
+plt.draw()
+```
+
+# Question 3
+
+Affichons la classification obtenue en utilisant la profondeur qui minimise le pourcentage d’erreurs obtenues avec l’entropie.
+
+```{python}
+best_depth_entropy = np.argmax(scores_entropy)
+best_score_entropy = scores_entropy[best_depth_entropy-1]
+print("Best depth for Entropy: ", best_depth_entropy)
+print("Best accuracy with Entropy: ", best_score_entropy)
+```
+
+```{python}
+plt.figure()
+frontiere(lambda x: dt_entropy.predict(x.reshape((1, -1))), X, Y, step=100)
+plt.title("Best frontier with entropy criterion")
+plt.draw()
+print("Best scores with entropy criterion: ", dt_entropy.score(X, Y))
+```
+
+# Question 4
+
+ Nous allons exporter le graphique de l'arbre obtenu dans la question précédente au format PDF en utilisant la fonction export_graphviz() du module tree. Le fichier résultant sera nommé 'TreeModel.pdf' et sera sauvegardé dans le répertoire 'Plots' du dépôt Git de ce TP.
+
+```{python}
+dt_entropy = tree.DecisionTreeClassifier(criterion = "entropy", max_depth=11)
+clf = dt_entropy.fit(X,Y)
+fig = tree.plot_tree(clf)
+plt.savefig("./plots/TreeModel.pdf")
+```
+
+# Question 5
+
+Nous allons créer un nouvel ensemble de données comprenant un total de n = 160 échantillons, répartis équitablement avec 40 échantillons pour chaque classe en utilisant la fonction rand_checkers(). Ensuite, nous évaluerons la performance des arbres de décision que nous avons précédemment entraînés en calculant la proportion d'erreurs sur cet échantillon de test.
+
+```{python}
+# Génération d'une base de test
+data_test = rand_checkers(n1 = 40, n2=40, n3=40, n4=40)
+X_test = data_test[:,0:2]
+Y_test = data_test[:,2] 
+
+test_dt_ent_score = dt_entropy.score(X_test,Y_test)
+test_dt_gini_score = dt_gini.score(X_test, Y_test)
+
+print("Proportion d'accurancy sur le nouvel échantillon (Entropy): {:.2f}%".format(test_dt_ent_score * 100))
+print("Proportion d'accurancy sur le nouvel échantillon (Gini): {:.2f}%".format(test_dt_gini_score * 100))
+```
+
+On remarque que le score de l'arbre calculé à partir de l'indice de Gini est inférieur à celui calculé par l'entropie. Ainsi, les deux scores sont plus bas que ceux calculés sur les échantillons d'entraînement. Pour évaluer le modèle, il sera nécessaire d'utiliser la méthode de **validation croisée**.
+
+# Question 6
+
+Modélisons la reconnaissance des chiffres à l'aide d'un modèle **d'arbre de décision** en utilisant un jeu de données disponible dans le module **sklearn.datasets**.
+
+```{python}
+digits = datasets.load_digits()
+n_samples = len(digits.data)
+# use test_train_split rather.
+
+X_digits = digits.data[:n_samples // 2]  # digits.images.reshape((n_samples, -1))
+Y_digits = digits.target[:n_samples // 2]
+X_test = digits.data[n_samples // 2:]
+Y_test = digits.target[n_samples // 2:]
+```
+
+
+```{python}
+#| fig-cap: "le pourcentage d'accurancy en fonction de la profondeur maximale de l’arbre"
+digits = datasets.load_digits()
+
+n_samples = len(digits.data)
+# use test_train_split rather.
+
+X_digits = digits.data[:n_samples // 2]  # digits.images.reshape((n_samples, -1))
+Y_digits = digits.target[:n_samples // 2]
+X_digits_test = digits.data[n_samples // 2:]
+Y_digits_test = digits.target[n_samples // 2:]
+
+d_max = 15
+scores_entropy = np.zeros(d_max)
+scores_gini = np.zeros(d_max)
+
+plt.figure(figsize=(15, 10))
+for i in range(d_max):
+    # max_depth=None
+    dt_entropy = tree.DecisionTreeClassifier(criterion = "entropy", max_depth=(i+1) )
+    dt_entropy.fit(X_digits, Y_digits)
+    scores_entropy[i] = dt_entropy.score(X_digits_test, Y_digits_test)
+
+    dt_gini =  tree.DecisionTreeClassifier(max_depth=(i+1) )
+    dt_gini.fit(X_digits, Y_digits)
+    scores_gini[i] = dt_gini.score(X_digits_test,Y_digits_test)
+
+plt.figure()
+plt.plot(scores_gini, label = "Gini Accurancy ") 
+plt.plot(scores_entropy,  label = "Entropy Accurancy ")
+plt.xlabel('Max depth')
+plt.ylabel('Accuracy Score')
+plt.legend()
+plt.draw()
+```
+
+Nous extrairons la profondeur qui minimise le pourcentage d'erreurs obtenues avec l'entropie
+
+```{python}
+best_depth_entropy = np.argmax(scores_entropy)
+best_score_entropy = scores_entropy[best_depth_entropy-1]
+print("Best depth for Entropy: ", best_depth_entropy)
+print("Best accuracy with Entropy: ", best_score_entropy)
+```
+
+# Question 7
+
+estimer la meilleur profondeur avec un cross_val_score
+```{python}
+from sklearn.model_selection import cross_val_score
+dmax = 20
+scores = np.ones(dmax)
+
+for i in range (dmax):
+    clf = tree.DecisionTreeClassifier(criterion = "entropy", max_depth=i+1)
+    scores[i] = np.mean(cross_val_score(clf, digits.data, digits.target, cv=5))
+tmax = np.argmax(scores)
+print("la meilleur profondeur avec un cross_val_score est : ", tmax)
+```
