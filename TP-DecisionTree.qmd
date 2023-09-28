@@ -48,7 +48,7 @@ $$
 
 $R^2$ varie de 0 à 1, où une valeur plus proche de 1 indique un meilleur ajustement du modèle aux données.
 
-### Classification avec les arbres
+*** Classification avec les arbres ***
 
 Avec scikit-learn on peut construire des arbres de décision grâce au package tree. On obtient un classifieur avec **tree.DecisionTreeClassifier**.
 
